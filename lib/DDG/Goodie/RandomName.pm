@@ -14,9 +14,24 @@ handle query => sub {
     my $person = Data::RandomPerson->new()->create();
     my $name = "$person->{firstname} $person->{lastname}";
     my %genders = (m => 'Male', f => 'Female');
-    return "Name: $name\nGender: $genders{$person->{gender}}\nDate of birth: $person->{dob}\nAge: $person->{age}",
-           heading => "Random Person" if /person/i;
-    return "$name (random)";
+    my $string_answer = "Name: $name\nGender: $genders{$person->{gender}}\nDate of birth: $person->{dob}\nAge: $person->{age}";
+
+    return $string_answer,
+    	structured_answer => {
+    	data => {
+    		name => $name,
+		gender => $genders{$person->{gender}},
+		date_of_birth => $person->{dob},
+		age => $person->{age}
+    	},
+    	templates => {
+    		group => 'text',
+    		options => {
+    			content => 'DDH.random_name.content'
+    		}
+    	}
+    };
+
 };
 
 

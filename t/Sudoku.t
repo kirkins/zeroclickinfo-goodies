@@ -16,7 +16,7 @@ sub build_answer {
     return re(qr/^[0-9_].*[0-9_]$/s),
         structured_answer => {
             data => {
-                sudoku_values => [re(qr/^[0-9_]/s)x81]
+                sudoku_values => [re(qr/^[0-9_]{81}/)]
             },
 
             templates => {

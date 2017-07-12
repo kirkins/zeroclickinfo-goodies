@@ -25,5 +25,3 @@ Goodies do not retrieve data from a third party API. Goodies provide their resul
 - Read the [Goodie documentation](https://docs.duckduckhack.com/walkthroughs/calculation.html) for technical help
 - View the list of [all live Goodie Instant Answers](https://duck.co/ia?repo=goodies&topic=programming) to see more examples
 
-
-test

@@ -77,7 +77,7 @@ ddg_goodie_test (
     'borrow $500000 at 4.5% with $100000 down' =>
         build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
     'borrow $250000 3% interest 15 years' =>
-        build_test('$1,726.45 for 15 year', 'Monthly Payment is $1,726.45 for 15 years. Total interest paid is $60,761.74'),
+        build_test('$1,726.45 for 15 years', 'Monthly Payment is $1,726.45 for 15 years. Total interest paid is $60,761.74'),
     'borrow $300000 at 3% interest with $50000 downpayment for 15 years' =>
         build_test('$1,726.45 for 15 years', 'Monthly Payment is $1,726.45 for 15 years. Total interest paid is $60,761.74'),
     'borrow $300000 3% $50000 down 15 year' =>
@@ -143,9 +143,9 @@ ddg_goodie_test (
 
     # Test a few cases of inferring user's location with 'loan' trigger word
     DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("de")) =>
-        test_zci('Monthly Payment is €2.026,74 for 30 years. Total interest paid is €329.626,85'),
+        build_test('€2.026,74 for 30 years', 'Monthly Payment is €2.026,74 for 30 years. Total interest paid is €329.626,85'),
     DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("in")) =>
-        test_zci('Monthly Payment is ₨2,026.74 for 30 years. Total interest paid is ₨329,626.85'),
+        build_test('₨2,026.74 for 30 years', 'Monthly Payment is ₨2,026.74 for 30 years. Total interest paid is ₨329,626.85'),
         # Given a common currency symbol and location, make sure we get the correct currency
     DDG::Request->new(query_raw => "loan \$400000 4.5%", location => test_location("au")) =>
         test_zci('Monthly Payment is $2 026.74 for 30 years. Total interest paid is $329 626.85'),

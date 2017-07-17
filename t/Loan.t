@@ -211,46 +211,46 @@ ddg_goodie_test (
         )) =>
         build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
 
-    # Test a few cases of inferring user's location with 'mortgage' trigger word
-    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => test_location("de")) =>
-        build_test('€2.026,74 for 30 years', 'Monthly Payment is €2.026,74 for 30 years. Total interest paid is €329.626,85'),
-    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => test_location("in")) =>
-        build_test('₨2,026.74 for 30 years', 'Monthly Payment is ₨2,026.74 for 30 years. Total interest paid is ₨329,626.85'),
-        # Given a common currency symbol and location, make sure we get the correct currency
-    DDG::Request->new(query_raw => "mortgage \$400000 4.5%", location => test_location("au")) =>
-        build_test('$2 026.74 for 30 years', 'Monthly Payment is $2 026.74 for 30 years. Total interest paid is $329 626.85'),
-    # Malaysia has no symbol, just the currency code after the amounts
-    DDG::Request->new(query_raw => "mortgage 400000 MYR at 4.5%", location => test_location("my")) =>
-        build_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
-    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => test_location("my")) =>
-        build_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
-    # Test that symbol overrides user's location
-    DDG::Request->new(query_raw => "mortgage \$400,000 4.5%", location => test_location("de")) =>
-        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
-    # Imagine a new country later appears, test defaulting to USD because we don't know about it
-    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => DDG::Location->new(
-            {
-                country_code => 'LL',
-                country_code3 => 'LLA',
-                country_name => 'Llama Land',
-                region => '9',
-                region_name => 'Llama Region',
-                city => 'New Llama City',
-                latitude => '90.0000',
-                longitude => '0.0000',
-                time_zone => 'America/New_York',
-                area_code => 0,
-                continent_code => 'NA',
-                metro_code => 0
-            }
-        )) =>
-        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
-    'loan $500000 at 4.5% with 20% down 15 years' =>
-        build_test('$3,059.97 for 15 years', 'Monthly Payment is $3,059.97 for 15 years. Total interest paid is $150,795.17'),
-    'borrow $500000 4.5%' =>
-        build_test('$2,533.43 for 30 years', 'Monthly Payment is $2,533.43 for 30 years. Total interest paid is $412,033.56'),
-    'mortgage $500000 4.5% 20% down 15 years' =>
-        build_test('$3,059.97 for 15 years', 'Monthly Payment is $3,059.97 for 15 years. Total interest paid is $150,795.17'),
+#    # Test a few cases of inferring user's location with 'mortgage' trigger word
+#    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => test_location("de")) =>
+#        build_test('€2.026,74 for 30 years', 'Monthly Payment is €2.026,74 for 30 years. Total interest paid is €329.626,85'),
+#    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => test_location("in")) =>
+#        build_test('₨2,026.74 for 30 years', 'Monthly Payment is ₨2,026.74 for 30 years. Total interest paid is ₨329,626.85'),
+#        # Given a common currency symbol and location, make sure we get the correct currency
+#    DDG::Request->new(query_raw => "mortgage \$400000 4.5%", location => test_location("au")) =>
+#        build_test('$2 026.74 for 30 years', 'Monthly Payment is $2 026.74 for 30 years. Total interest paid is $329 626.85'),
+#    # Malaysia has no symbol, just the currency code after the amounts
+#    DDG::Request->new(query_raw => "mortgage 400000 MYR at 4.5%", location => test_location("my")) =>
+#        build_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
+#    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => test_location("my")) =>
+#        build_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
+#    # Test that symbol overrides user's location
+#    DDG::Request->new(query_raw => "mortgage \$400,000 4.5%", location => test_location("de")) =>
+#        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
+#    # Imagine a new country later appears, test defaulting to USD because we don't know about it
+#    DDG::Request->new(query_raw => "mortgage 400000 4.5%", location => DDG::Location->new(
+#            {
+#                country_code => 'LL',
+#                country_code3 => 'LLA',
+#                country_name => 'Llama Land',
+#                region => '9',
+#                region_name => 'Llama Region',
+#                city => 'New Llama City',
+#                latitude => '90.0000',
+#                longitude => '0.0000',
+#                time_zone => 'America/New_York',
+#                area_code => 0,
+#                continent_code => 'NA',
+#                metro_code => 0
+#            }
+#        )) =>
+#        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
+#    'loan $500000 at 4.5% with 20% down 15 years' =>
+#        build_test('$3,059.97 for 15 years', 'Monthly Payment is $3,059.97 for 15 years. Total interest paid is $150,795.17'),
+#    'borrow $500000 4.5%' =>
+#        build_test('$2,533.43 for 30 years', 'Monthly Payment is $2,533.43 for 30 years. Total interest paid is $412,033.56'),
+#    'mortgage $500000 4.5% 20% down 15 years' =>
+#        build_test('$3,059.97 for 15 years', 'Monthly Payment is $3,059.97 for 15 years. Total interest paid is $150,795.17'),
 );
 
 

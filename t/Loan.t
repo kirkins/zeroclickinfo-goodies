@@ -188,10 +188,10 @@ ddg_goodie_test (
     DDG::Request->new(query_raw => "borrow 400000 MYR at 4.5%", location => test_location("my")) =>
         build_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
     DDG::Request->new(query_raw => "borrow 400000 4.5%", location => test_location("my")) =>
-        built_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
+        build_test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
     # Test that symbol overrides user's location
-    DDG::Request->new(query_raw => "borrow \$400,000 4.5%", location => test_location("de")) =>
-        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
+#    DDG::Request->new(query_raw => "borrow \$400,000 4.5%", location => test_location("de")) =>
+#        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
     # Imagine a new country later appears, test defaulting to USD because we don't know about it
 #    DDG::Request->new(query_raw => "borrow 400000 4.5%", location => DDG::Location->new(
 #            {

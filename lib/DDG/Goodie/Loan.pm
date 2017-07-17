@@ -139,9 +139,19 @@ handle remainder => sub {
 	my $monthly_payment = loan_monthly_payment($loan_amount, $rate / 12 * .01, $years * 12);
 	my $total_interest = ($monthly_payment * 12 * $years) - $loan_amount;
 
-	return "Monthly Payment is " . currency_format($currency_code, $monthly_payment, FMT_SYMBOL) .
+	my $string_answer = "Monthly Payment is " . currency_format($currency_code, $monthly_payment, FMT_SYMBOL) .
 	    " for $years years. Total interest paid is " .
 	    currency_format($currency_code, $total_interest, FMT_SYMBOL);
+        my $title = currency_format($currency_code, $monthly_payment, FMT_SYMBOL) . " for $years years";
+        return $string_answer, structured_answer => {
+            data => {
+                title => $title,
+                subtitle => $string_answer,
+            },
+            templates => {
+                group => 'text'
+            }
+        }
 
     }
     return;

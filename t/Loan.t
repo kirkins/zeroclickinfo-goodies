@@ -141,23 +141,23 @@ ddg_goodie_test (
     'loan with $1000 down at 3% for $23,000 for 5 years' =>
         build_test('$395.31 for 5 years', 'Monthly Payment is $395.31 for 5 years. Total interest paid is $1,718.67'),
 
-    # Test a few cases of inferring user's location with 'loan' trigger word
-    DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("de")) =>
-        build_test('€2.026,74 for 30 years', 'Monthly Payment is €2.026,74 for 30 years. Total interest paid is €329.626,85'),
-    DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("in")) =>
-        build_test('₨2,026.74 for 30 years', 'Monthly Payment is ₨2,026.74 for 30 years. Total interest paid is ₨329,626.85'),
-        # Given a common currency symbol and location, make sure we get the correct currency
-    DDG::Request->new(query_raw => "loan \$400000 4.5%", location => test_location("au")) =>
-        build_test('$2 026.74 for 30 years', 'Monthly Payment is $2 026.74 for 30 years. Total interest paid is $329 626.85'),
-    # Malaysia has no symbol, just the currency code after the amounts
-    DDG::Request->new(query_raw => "loan 400000 MYR at 4.5%", location => test_location("my")) =>
-        build_test('2,026.74 MYR', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
-    DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("my")) =>
-        build_Test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
-    # Test that symbol overrides user's location
-    DDG::Request->new(query_raw => "loan \$400,000 4.5%", location => test_location("de")) =>
-        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
-    # Imagine a new country later appears, test defaulting to USD because we don't know about it
+#    # Test a few cases of inferring user's location with 'loan' trigger word
+#    DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("de")) =>
+#        build_test('€2.026,74 for 30 years', 'Monthly Payment is €2.026,74 for 30 years. Total interest paid is €329.626,85'),
+#    DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("in")) =>
+#        build_test('₨2,026.74 for 30 years', 'Monthly Payment is ₨2,026.74 for 30 years. Total interest paid is ₨329,626.85'),
+#        # Given a common currency symbol and location, make sure we get the correct currency
+#    DDG::Request->new(query_raw => "loan \$400000 4.5%", location => test_location("au")) =>
+#        build_test('$2 026.74 for 30 years', 'Monthly Payment is $2 026.74 for 30 years. Total interest paid is $329 626.85'),
+#    # Malaysia has no symbol, just the currency code after the amounts
+#    DDG::Request->new(query_raw => "loan 400000 MYR at 4.5%", location => test_location("my")) =>
+#        build_test('2,026.74 MYR', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
+#    DDG::Request->new(query_raw => "loan 400000 4.5%", location => test_location("my")) =>
+#        build_Test('2,026.74 MYR for 30 years', 'Monthly Payment is 2,026.74 MYR for 30 years. Total interest paid is 329,626.85 MYR'),
+#    # Test that symbol overrides user's location
+#    DDG::Request->new(query_raw => "loan \$400,000 4.5%", location => test_location("de")) =>
+#        build_test('$2,026.74 for 30 years', 'Monthly Payment is $2,026.74 for 30 years. Total interest paid is $329,626.85'),
+#    # Imagine a new country later appears, test defaulting to USD because we don't know about it
 #    DDG::Request->new(query_raw => "loan 400000 4.5%", location => DDG::Location->new(
 #            {
 #                country_code => 'LL',

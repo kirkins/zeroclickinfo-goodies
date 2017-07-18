@@ -83,15 +83,12 @@ sub get_flag {
 # Handle statement
 handle remainder => sub {
     my $text;
-    my $html;
     my $query;
-    my $header;
 
     if (exists $dates{lc($_)}) {
         # Search by name first
         $query = ucfirst($_);
-        ($text, $html) = split('\|', $dates{lc($_)});
-        $header = "Name days for <b>$query</b>";
+        $text = $dates{lc($_)};
     } else {
         # Then, search by date
         my $day = parse_datestring_to_date($_);

@@ -77,7 +77,7 @@ sub parse_other_date_formats {
 
 sub get_flag {
     my $country = shift;
-    return '<span class="flag-sm flag-sm-' . country2code($country) . '"></span>';
+    return country2code($country);
 }
 
 # Handle statement
@@ -112,24 +112,9 @@ handle remainder => sub {
         $suffix = 'rd' if $daynum == 3 || $daynum == 23;
         $query = $day->month_name() . " $daynum$suffix";
         $text = $names[$day->day_of_year() - 1];
-
-        # Convert to HTML
-        $html = $text;
-        $html =~ s/(\d{1,2}) (\w{1,3})/$1&nbsp;$2/g;
-        $html =~ s@(.*?): (.*?)(?:$|; )@'<tr><td class="name-days-country">' . get_flag($1) .
-                                        ' <span class="name-days-country-name">' . $1 . '</span>' .
-                                        '</td><td class="name-days-dates">'  . $2 . '</td></tr>'@ge;
-
-        $header = "Name days on <b>$query</b>";
     }
 
-    # Add the header
-    $html = '<div class="zci--name_days">' .
-        "<span>$header</span>" .
-        '<div class="zci__content"><table>' .
-        $html . '</table></div></div>';
-
-    return $text, html => $html;
+    return $text, html => $text;
 };
 
 1;
